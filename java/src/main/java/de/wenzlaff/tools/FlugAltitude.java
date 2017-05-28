@@ -9,7 +9,7 @@ import org.opensky.model.StateVector;
 /**
  * Klasse zum ausgeben der Flughöhen
  * 
- * http://blog.wenzlaff.de/?p=8176
+ * http://blog.wenzlaff.de/?p=8198
  * 
  * @author Thomas Wenzlaff
  *
@@ -28,9 +28,11 @@ public class FlugAltitude {
 	private static Collection<StateVector> sv7000Bis8000 = new ArrayList<>();
 	private static Collection<StateVector> sv8000Bis9000 = new ArrayList<>();
 	private static Collection<StateVector> sv9000Bis10000 = new ArrayList<>();
-	private static Collection<StateVector> sv10000Bis110000 = new ArrayList<>();
-	private static Collection<StateVector> sv110000Bis12000 = new ArrayList<>();
-	private static Collection<StateVector> sv120000Bis13000 = new ArrayList<>();
+	private static Collection<StateVector> sv10000Bis10500 = new ArrayList<>();
+	private static Collection<StateVector> sv10500Bis11000 = new ArrayList<>();
+	private static Collection<StateVector> sv11000Bis11500 = new ArrayList<>();
+	private static Collection<StateVector> sv11500Bis12000 = new ArrayList<>();
+	private static Collection<StateVector> sv12000Bis13000 = new ArrayList<>();
 	private static Collection<StateVector> svUeber13000 = new ArrayList<>();
 
 	/**
@@ -61,9 +63,11 @@ public class FlugAltitude {
 		System.out.println("7000-8000   ; " + sv7000Bis8000.size());
 		System.out.println("8000-9000   ; " + sv8000Bis9000.size());
 		System.out.println("9000-10000  ; " + sv9000Bis10000.size());
-		System.out.println("10000-11000 ; " + sv10000Bis110000.size());
-		System.out.println("11000-12000 ; " + sv110000Bis12000.size());
-		System.out.println("12000-13000 ; " + sv120000Bis13000.size());
+		System.out.println("10000-10500 ; " + sv10000Bis10500.size());
+		System.out.println("10500-11000 ; " + sv10500Bis11000.size());
+		System.out.println("11000-11500 ; " + sv11000Bis11500.size());
+		System.out.println("11500-12000 ; " + sv11500Bis12000.size());
+		System.out.println("12000-13000 ; " + sv12000Bis13000.size());
 		System.out.println("über 13000  ; " + svUeber13000.size());
 
 		System.out.println("Summme      ; " + states.size());
@@ -99,12 +103,16 @@ public class FlugAltitude {
 			sv8000Bis9000.add(vector);
 		} else if (hoehe >= 9000 && hoehe <= 10000) {
 			sv9000Bis10000.add(vector);
-		} else if (hoehe >= 10000 && hoehe <= 11000) {
-			sv10000Bis110000.add(vector);
-		} else if (hoehe >= 11000 && hoehe <= 12000) {
-			sv110000Bis12000.add(vector);
+		} else if (hoehe >= 10000 && hoehe <= 10500) {
+			sv10000Bis10500.add(vector);
+		} else if (hoehe >= 10500 && hoehe <= 11000) {
+			sv10500Bis11000.add(vector);
+		} else if (hoehe >= 11000 && hoehe <= 11500) {
+			sv11000Bis11500.add(vector);
+		} else if (hoehe >= 11500 && hoehe <= 12000) {
+			sv11500Bis12000.add(vector);
 		} else if (hoehe >= 12000 && hoehe <= 13000) {
-			sv120000Bis13000.add(vector);
+			sv12000Bis13000.add(vector);
 		} else if (hoehe >= 13000) {
 			svUeber13000.add(vector);
 		}

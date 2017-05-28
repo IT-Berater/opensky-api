@@ -10,7 +10,7 @@ import org.opensky.model.StateVector;
 /**
  * Klasse ausgeben der Flughöhen.
  * 
- * http://blog.wenzlaff.de/?p=8176
+ * http://blog.wenzlaff.de/?p=8198
  * 
  * @author Thomas Wenzlaff
  *
