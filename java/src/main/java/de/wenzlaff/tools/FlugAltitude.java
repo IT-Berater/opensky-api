@@ -51,7 +51,8 @@ public class FlugAltitude {
 
 	private static void ausgabe(Collection<StateVector> states) {
 
-		System.out.println("Parken      ; " + svParken.size());
+		System.out.println("Flugbereich in Meter ; Flughöhe in Meter ");
+		System.out.println("Parken 0    ; " + svParken.size());
 		System.out.println("   1-500    ; " + sv1Bis500.size());
 		System.out.println(" 500-1000   ; " + sv500Bis1000.size());
 		System.out.println("1000-2000   ; " + sv1000Bis2000.size());
