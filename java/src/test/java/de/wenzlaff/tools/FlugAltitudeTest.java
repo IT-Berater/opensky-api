@@ -1,5 +1,6 @@
 package de.wenzlaff.tools;
 
+import java.io.IOException;
 import java.util.Collection;
 
 import org.junit.Test;
@@ -19,6 +20,11 @@ public class FlugAltitudeTest {
 
 	@Test
 	public void testPrintFlugAltitude() throws Exception {
+
+		getData();
+	}
+
+	private void getData() throws IOException {
 
 		OpenSkyApi api = new OpenSkyApi();
 		OpenSkyStates os = api.getStates(0, null);

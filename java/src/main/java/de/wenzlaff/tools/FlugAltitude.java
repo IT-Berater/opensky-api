@@ -1,8 +1,15 @@
 package de.wenzlaff.tools;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.UUID;
 
 import org.opensky.model.StateVector;
 
@@ -15,6 +22,9 @@ import org.opensky.model.StateVector;
  *
  */
 public class FlugAltitude {
+
+	/** Trennkennzeichen. */
+	private static final String T = ";";
 
 	private static Collection<StateVector> svParken = new ArrayList<>();
 	private static Collection<StateVector> sv1Bis500 = new ArrayList<>();
@@ -47,6 +57,33 @@ public class FlugAltitude {
 		}
 
 		ausgabe(states);
+		addToFile(states);
+	}
+
+	private static void addToFile(Collection<StateVector> states) {
+
+		Path path = Paths.get("flug-data.csv");
+
+		try {
+			if (!Files.exists(path)) {
+				Files.createFile(path);
+				String header = "UUID" + T + "Summme" + T + "Zeitpunkt" + T + "Parken 0" + T + "1-500 " + T + "500-1000" + T + "1000-2000" + T + "2000-3000" + T + "3000-4000" + T
+						+ "4000-5000" + T + "5000-6000" + T + "6000-7000" + T + "7000-8000" + T + "8000-9000" + T + "9000-10000" + T + "10000-10500" + T + "10500-11000" + T
+						+ "11000-11500" + T + "11500-12000" + T + "12000-13000" + T + "über 13000" + System.lineSeparator();
+				Files.write(path, header.getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
+			}
+
+			String data = UUID.randomUUID() + T + states.size() + T + new Date() + T + svParken.size() + T + sv1Bis500.size() + T + sv500Bis1000.size() + T + sv1000Bis2000.size()
+					+ T + sv2000Bis3000.size() + T + sv3000Bis4000.size() + T + sv4000Bis5000.size() + T + sv5000Bis6000.size() + T + sv6000Bis7000.size() + T
+					+ sv7000Bis8000.size() + T + sv8000Bis9000.size() + T + sv9000Bis10000.size() + T + sv10000Bis10500.size() + T + sv10500Bis11000.size() + T
+					+ sv11000Bis11500.size() + T + sv11500Bis12000.size() + T + sv12000Bis13000.size() + T + svUeber13000.size() + System.lineSeparator();
+
+			System.out.println(data);
+
+			Files.write(path, data.getBytes(), StandardOpenOption.APPEND);
+		} catch (IOException e) {
+			System.err.println(e);
+		}
 	}
 
 	private static void ausgabe(Collection<StateVector> states) {
