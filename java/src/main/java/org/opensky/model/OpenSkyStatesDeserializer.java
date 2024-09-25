@@ -42,10 +42,10 @@ public class OpenSkyStatesDeserializer extends StdDeserializer<OpenSkyStates> {
 			sv.setCallsign(jp.nextTextValue());
 			sv.setOriginCountry(jp.nextTextValue());
 			sv.setLastPositionUpdate((jp.nextToken() != null && jp.getCurrentToken() != JsonToken.VALUE_NULL ? jp.getDoubleValue() : null));
-			sv.setLastVelocityUpdate((jp.nextToken() != null && jp.getCurrentToken() != JsonToken.VALUE_NULL ? jp.getDoubleValue() : null));
+			sv.setLastContact((jp.nextToken() != null && jp.getCurrentToken() != JsonToken.VALUE_NULL ? jp.getDoubleValue() : null));
 			sv.setLongitude((jp.nextToken() != null && jp.getCurrentToken() != JsonToken.VALUE_NULL ? jp.getDoubleValue() : null));
 			sv.setLatitude((jp.nextToken() != null && jp.getCurrentToken() != JsonToken.VALUE_NULL ? jp.getDoubleValue() : null));
-			sv.setAltitude((jp.nextToken() != null && jp.getCurrentToken() != JsonToken.VALUE_NULL ? jp.getDoubleValue() : null));
+			sv.setBaroAltitude((jp.nextToken() != null && jp.getCurrentToken() != JsonToken.VALUE_NULL ? jp.getDoubleValue() : null));
 			sv.setOnGround(jp.nextBooleanValue());
 			sv.setVelocity((jp.nextToken() != null && jp.getCurrentToken() != JsonToken.VALUE_NULL ? jp.getDoubleValue() : null));
 			sv.setHeading((jp.nextToken() != null && jp.getCurrentToken() != JsonToken.VALUE_NULL ? jp.getDoubleValue() : null));
@@ -58,6 +58,16 @@ public class OpenSkyStatesDeserializer extends StdDeserializer<OpenSkyStates> {
 					sv.addSerial(jp.getIntValue());
 				}
 			}
+
+			sv.setGeoAltitude((jp.nextToken() != null && jp.getCurrentToken() != JsonToken.VALUE_NULL ? jp.getDoubleValue() : null));
+			sv.setSquawk(jp.nextTextValue());
+			sv.setSpi(jp.nextBooleanValue());
+
+			int psi = jp.nextIntValue(0);
+			StateVector.PositionSource ps = psi <= StateVector.PositionSource.values().length ?
+					StateVector.PositionSource.values()[psi] : StateVector.PositionSource.UNKNOWN;
+
+			sv.setPositionSource(ps);
 
 			// there are additional fields (upward compatibility), consume until end of this state vector array
 			next = jp.nextToken();
